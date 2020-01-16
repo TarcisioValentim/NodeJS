@@ -1,0 +1,24 @@
+<html>
+    <head><title>ScanQRCode</title></head>
+    <body>
+        <video id="webcam"></video>
+
+        <script src="instascan.min.js"></script>
+        <script>
+            const scanner = new Instascan.Scanner({
+                  video: document.getElementById('webcam')
+            })
+            scanner.addEventListener('scan', content =>{
+                console.log(content)
+                window.open(content, "_blank");
+            })
+            Instascan.Camera.getCameras().them( cameras =>{
+                if(cameras.length > 0){
+                    scanner.start(cameras[0])
+                }else{
+                    console.error("Nao existe camera no dispositivo!")
+                }
+            })
+        </script>
+    </body>
+</html>
